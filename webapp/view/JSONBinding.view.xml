@@ -7,9 +7,9 @@
             <headerToolbar>
                 <Toolbar id="toolbar1">
                     <Title id="panelTitle" text="Data Binding Basics"/>
-                    <ToolbarSpacer id="toolbar"/>
-                    <Button id="toolBarButton" icon="sap-icon://settings"/>
-                    </Toolbar>
+                    <!--<ToolbarSpacer id="toolbar"/>
+                    <Button id="toolBarButton" icon="sap-icon://settings"/>-->
+                </Toolbar>
                 
             </headerToolbar>
             <content>
@@ -75,17 +75,11 @@
                                         formatOptions: {showMeasure: false } }" numberUnit="{products>CurrencyCode}" id="list">
                             
                             <attributes>
-                                <ObjectAttribute text="{products>QuantityPerUnit}" id="attribute0"/>
+                                <ObjectAttribute text="Stock on Hand: {products>QuantityPerUnit}" id="attribute0"/>
+                                <ObjectAttribute text="{ parts: [ {path:'products>UnitPrice'}, {path:'products>UnitsInStock'}, {path:'products>CurrencyCode'} ], formatter:'.formatter.formatStockValue'}" id="attribute1"
+                                                 title="{i18n>currentStockValue}"/>
                             </attributes>
                             
-                            <firstStatus>
-                                <ObjectStatus text="{i18n>currentStockValue}" id="status0"/>
-                            </firstStatus>
-                            
-                            <secondStatus>
-                                <ObjectStatus text="{ parts: [ {path:'products>UnitPrice'}, {path:'products>UnitsInStock'}, {path:'products>CurrencyCode'} ], formatter:'.formatter.formatStockValue'}" 
-                                                    id="status1"/> 
-                            </secondStatus>
                         </ObjectListItem>
                     </items>
                 </List>
@@ -119,6 +113,12 @@
 
                         <Label text="Units in Stock" id="lblUnitsInStock"/>    
                         <Input width="100%" id="inpUnitsInStock" value="{products>UnitsInStock}"/>
+
+                        <Label text="Units on Order" id="lblUnitsOnOrder"/>    
+                        <Input width="100%" id="inpUnitsOnOrder" value="{products>UnitsOnOrder}"/>
+
+                        <Label text="ReorderLevel" id="lblReorderLevel"/>    
+                        <Input width="100%" id="inpReorderLevel" value="{products>ReorderLevel}"/>
 
                         <Label text="Discontinued" id="lblDiscontinued"/>    
                         <Input width="100%" id="inpDiscontinued" value="{products>Discontinued}"/>

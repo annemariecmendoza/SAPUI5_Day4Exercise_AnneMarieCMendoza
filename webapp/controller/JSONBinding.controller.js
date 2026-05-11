@@ -22,7 +22,7 @@ sap.ui.define([
                     Zip: "1700",
                     Country: "Philippines"
                 },
-                SalesAmount: 15000,
+                SalesAmount: 999999,
                 CurrencyCode: "PHP"
             };
 
@@ -45,6 +45,12 @@ sap.ui.define([
             //set addressData to bind to view and name it as "products" because models can only handle one unnamed   
             this.getView().setModel(productsModel, "products");
 
+            // -----------------------Bind i18n-----------------------------//
+            var oI18nModel = new sap.ui.model.resource.ResourceModel({
+                bundleName: "sapips.training.jsonbinding.i18n.i18n"
+            });
+
+            sap.ui.getCore().setModel(oI18nModel, "i18n");
 
         },
 
