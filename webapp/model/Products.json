@@ -1,0 +1,43 @@
+{
+  "Products": [
+    {
+      "ProductID": "1001",
+      "ProductName": "Laptop",
+      "SupplierID": "S001",
+      "CategoryID": "C001",
+      "QuantityPerUnit": "1 unit",
+      "UnitPrice": 55000,
+      "UnitsInStock": 25,
+      "UnitsOnOrder": 10,
+      "ReorderLevel": 5,
+      "Discontinued": false,
+      "CurrencyCode": "PHP"
+    },
+    {
+      "ProductID": "1002",
+      "ProductName": "Wireless Mouse",
+      "SupplierID": "S002",
+      "CategoryID": "C002",
+      "QuantityPerUnit": "1 piece",
+      "UnitPrice": 800,
+      "UnitsInStock": 100,
+      "UnitsOnOrder": 20,
+      "ReorderLevel": 15,
+      "Discontinued": false,
+      "CurrencyCode": "PHP"
+    },
+    {
+      "ProductID": "1003",
+      "ProductName": "Keyboard",
+      "SupplierID": "S003",
+      "CategoryID": "C002",
+      "QuantityPerUnit": "1 piece",
+      "UnitPrice": 1200,
+      "UnitsInStock": 50,
+      "UnitsOnOrder": 0,
+      "ReorderLevel": 10,
+      "Discontinued": true,
+      "CurrencyCode": "PHP"
+    }
+  ]
+}

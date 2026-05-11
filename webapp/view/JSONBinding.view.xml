@@ -1,6 +1,133 @@
-<mvc:View controllerName="sapips.training.jsonbinding.controller.JSONBinding"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="sapips.training.jsonbinding.controller.JSONBinding">
     <Page id="page" title="{i18n>title}">
+    <content>
+
+        <!--*****************************************EID Panel********************************************************-->
+        <Panel xmlns="sap.m" class="sapUIResponsiveMargin" width="auto" expanded="true" id="panel0">
+            <headerToolbar>
+                <Toolbar id="toolbar1">
+                    <Title id="panelTitle" text="Data Binding Basics"/>
+                    <ToolbarSpacer id="toolbar"/>
+                    <Button id="toolBarButton" icon="sap-icon://settings"/>
+                    </Toolbar>
+                
+            </headerToolbar>
+            <content>
+                <sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="form0" labelSpanL="3" labelSpanM="4" columnsL="1" adjustLabelSpan="false" emptySpanL="0" emptySpanM="0">
+                    <sap.ui.layout.form:content>
+                        <Label text="EID" id="eid"/>
+                        <Input width="100%" id="inpEid" value="{address>/inpEid}">
+                            <layoutData>
+                                <l:GridData id="Grid1" span="L4 M6 S12"/>  <!--Span L-for large M-for medium S-small; determines size for responsiveness out of 12 grid-->
+                            </layoutData>
+                        </Input>
+                        <Label text="Enabled" id="enabledCheck"/>
+                        <CheckBox xmlns="sap.m" id="cbxEnabled" selected="{address>/cbxEnabled}"/>
+                    </sap.ui.layout.form:content>
+                </sap.ui.layout.form:SimpleForm>
+                
+            </content>
+            </Panel>
+
+        <!--*****************************************Address Panel********************************************************-->
+        <Panel xmlns="sap.m" class="sapUIResponsiveMargin" width="auto" expanded="true" id="panel0_1778205110714">
+            <headerToolbar>
+                <Toolbar id="toolbar1_1778205110714">
+                    <Title id="addressTitle" text="Address Details"/>
+                    <!-- <ToolbarSpacer id="addressToolbar"/>
+                    <Button id="addressToolbarButton" icon="sap-icon://settings"/> -->
+                </Toolbar>
+                
+            </headerToolbar>
+            <content>
+                <f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0_1778205431427">
+                    <f:content>
+                        <Label text="Address" id="addressLabel"/>
+                        <Text xmlns="sap.m" text="{address>/Address/Street} {address>/Address/Zip} {address>/Address/City} {address>/Address/Country}" id="AddressText" class="sapUiSmallMarginBottom"/>
+                        <Link xmlns="sap.m" href="{ path: 'address>/inpEid', formatter: '.formatter.formatEmail'}" text="Send Email" id="SendEmail"/>
+                        <Label text="Sales Amount" id="salesAmountLabel" class="sapUiSmallMarginBegin"/>
+                        <Input id="salesAmountInput" class="sapUiSmallMarginBegin" 
+                                value="{ parts: [{path: 'address>/SalesAmount'}, {path: 'address>/CurrencyCode'}], type:'sap.ui.model.type.Currency', formatOptions:{showMeasure: false} }" 
+                                maxLength="8" description="{address>/CurrencyCode}">
+                            <layoutData>
+                                <l:GridData id="salesAmountGrid" span="L4 M6 S12"/>  <!--Span L-for large M-for medium S-small; determines size for responsiveness out of 12 grid-->
+                            </layoutData>
+                        </Input>
+                    </f:content>
+                </f:SimpleForm>
+            </content>
+            </Panel>
+
+        <!--*****************************************Aggregation Panel********************************************************-->    
+        <Panel xmlns="sap.m" class="sapUIResponsiveMargin" width="auto" expanded="true" id="panel0_1778230724715">
+            <headerToolbar>
+                <Toolbar id="toolbar1_1778230724715">
+                    <Title id="aggregationTitle" text="Aggregation Binding"/>
+                    <!-- <ToolbarSpacer id="aggregationToolbar"/>
+                    <Button icon="sap-icon://settings"/> -->
+                </Toolbar>
+            </headerToolbar>
+            <content>
+                <List items="{products>/Products}" id="productList" mode="SingleSelectMaster" selectionChange="onRowSelect">
+                    <items>
+                        <ObjectListItem type="Active" title="{products>ProductName}" 
+                                        number="{ parts: [ {path:'products>UnitPrice'}, {path:'products>CurrencyCode'} ], type:'sap.ui.model.type.Currency',                                                                              
+                                        formatOptions: {showMeasure: false } }" numberUnit="{products>CurrencyCode}" id="list">
+                            
+                            <attributes>
+                                <ObjectAttribute text="{products>QuantityPerUnit}" id="attribute0"/>
+                            </attributes>
+                            
+                            <firstStatus>
+                                <ObjectStatus text="{i18n>currentStockValue}" id="status0"/>
+                            </firstStatus>
+                            
+                            <secondStatus>
+                                <ObjectStatus text="{ parts: [ {path:'products>UnitPrice'}, {path:'products>UnitsInStock'}, {path:'products>CurrencyCode'} ], formatter:'.formatter.formatStockValue'}" 
+                                                    id="status1"/> 
+                            </secondStatus>
+                        </ObjectListItem>
+                    </items>
+                </List>
+            </content>
+            </Panel>    
+
+        <!--*****************************************Product Details Panel********************************************************-->  
+        <Panel xmlns="sap.m" class="sapUIResponsiveMargin" width="auto" expanded="true" id="panel0_1778233787575">    
+            <headerToolbar>    
+                <Toolbar id="toolbar1_1778233787575">    
+                    <Title id="productTitle" text="Product Details"/>    
+                    <!-- <ToolbarSpacer/>    
+                    <Button icon="sap-icon://settings"/>-->
+                </Toolbar>    
+                    
+            </headerToolbar>    
+            <content>    
+                <f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0_1778233978247">    
+                    <f:content>       
+                        <Label text="Product ID" id="lblProductID"/>    
+                        <Input width="100%" id="inpProductId" value="{products>ProductID}"/>   
+
+                        <Label text="Product Name" id="lblProductName"/>    
+                        <Input width="100%" id="inpProductName" value="{products>ProductName}"/>
+
+                        <Label text="Quantity Per Unit" id="lblQuantityPerUnit"/>    
+                        <Input width="100%" id="inpQuantityPerUnit" value="{products>QuantityPerUnit}"/>
+
+                        <Label text="Unit Price" id="lblUnitPrice"/>    
+                        <Input width="100%" id="inpUnitPrice" value="{products>UnitPrice}"/>
+
+                        <Label text="Units in Stock" id="lblUnitsInStock"/>    
+                        <Input width="100%" id="inpUnitsInStock" value="{products>UnitsInStock}"/>
+
+                        <Label text="Discontinued" id="lblDiscontinued"/>    
+                        <Input width="100%" id="inpDiscontinued" value="{products>Discontinued}"/>
+
+                    </f:content>    
+                </f:SimpleForm>    
+                    
+            </content>    
+            </Panel>
+    </content>
     </Page>
 </mvc:View>
